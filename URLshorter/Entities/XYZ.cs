@@ -16,6 +16,8 @@ namespace URLshorter.Entities
 
         [ForeignKey("CategoryId")]
         public virtual Category? Category { get; set; }
+        [ForeignKey("UserId")]
+        public virtual User? User { get; set; }
         public XYZ()
 		{
             VisitCount = 0;
