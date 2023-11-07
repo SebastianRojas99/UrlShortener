@@ -13,7 +13,10 @@ namespace URLshorter.Entities
 		public string Email { get; set; }
 		public string Pass { get; set; }
 		public Rol Rol { get; set; } = Rol.User;
+        public User()
+        {
+        }
 
-	}
+    }
 }
 

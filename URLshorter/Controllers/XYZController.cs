@@ -3,10 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using URLshorter.Entities; 
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace URLshorter.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
+    [Authorize]
     public class XYZController : Controller
     {
         private readonly URLshorterContext _context;
@@ -17,7 +20,7 @@ namespace URLshorter.Controllers
         }
 
         [HttpPost("crear-url-corta/{categoryId}")]
-        public IActionResult ShortenUrl(int categoryId,[FromBody] string originalUrl)
+        public IActionResult ShortenUrl(int categoryId,[FromBody] string originalUrl,int userId)
         {
             if (string.IsNullOrEmpty(originalUrl))
             {
@@ -35,7 +38,8 @@ namespace URLshorter.Controllers
             {
                 urlOG = originalUrl, 
                 urlShort = newShortUrl,
-                CategoryId = categoryId
+                CategoryId = categoryId,
+                UserId  = userId
                 
             };
 
@@ -91,7 +95,8 @@ namespace URLshorter.Controllers
             {
                 Shorterurl = urlEntity.urlShort,
                 OgURL = urlEntity.urlOG,
-                CategoryName = urlEntity.Category!= null? urlEntity.Category.CategoryName:"sin categoria"
+                CategoryName = urlEntity.Category!= null? urlEntity.Category.CategoryName:"sin categoria",
+                UserEmail = urlEntity.User != null ? urlEntity.User.Email : "sin email",
             }).ToListAsync();
 
             return Ok(urlInfo);

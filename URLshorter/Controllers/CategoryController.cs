@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using URLshorter.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -13,6 +14,8 @@ namespace URLshorter.Controllers
 {
     
     [Route("api/[controller]")]
+    [ApiController]
+    [Authorize]
     public class CategoryController : Controller
     {
         private readonly URLshorterContext _context;
