@@ -12,16 +12,8 @@ using URLshorter.Services.Implementations;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace URLshorter.Controllers
-{
-    [Route("api/[controller]")]
-    public class AuthController : Controller
-    {
-        
-    }
-}
 
-namespace AgendaApi.Controllers
+namespace URLshorter.Controllers
 {
     [Route("api/authentication")]
     [ApiController]
