@@ -63,6 +63,10 @@ namespace URLshorter
         };
     }
 );
+            #region DependencyInjections
+            builder.Services.AddScoped<IUserService, UserService>();
+            #endregion
+
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy(
@@ -81,6 +85,7 @@ namespace URLshorter
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+
             var app = builder.Build();
 
             if (app.Environment.IsDevelopment())
@@ -90,7 +95,9 @@ namespace URLshorter
             }
 
             app.UseHttpsRedirection();
-            app.UseCors("AllowOrigin");
+            app.UseCors(
+  options => options.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin()
+      );
             app.UseAuthorization();
 
             app.MapControllers();

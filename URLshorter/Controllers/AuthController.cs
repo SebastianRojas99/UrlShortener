@@ -15,9 +15,9 @@ using URLshorter.Services.Implementations;
 
 namespace URLshorter.Controllers
 {
-    [Route("api/authentication")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class AuthController : Controller
     {
         private readonly IConfiguration _config;
         private readonly IUserService _userService;

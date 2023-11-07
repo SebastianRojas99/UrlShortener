@@ -6,7 +6,7 @@ namespace URLshorter.Services.Interfaces
 {
 	public interface IUserService
 	{
-        User? ValidateUser(AuthenticationRequestDto authRequestBody);
+        User ValidateUser(AuthenticationRequestDto authRequestBody);
     }
 }
 
