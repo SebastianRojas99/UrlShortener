@@ -64,15 +64,22 @@ namespace URLshorter.Controllers
             _context.SaveChanges();
             return Ok(new { OriginalUrl = urlEntity.urlOG }); 
         }
-        [HttpGet("redireccionando url")]
-        public IActionResult redireccionURL([FromQuery] string shorter)
+        [HttpGet("redireccionando-url/{shorter}")]
+        public IActionResult RedireccionURL([FromRoute] string shorter)
         {
             var urlEntity = _context.XYZs.SingleOrDefault(x => x.urlShort == shorter);
+            if (urlEntity == null)
+            {
+                return NotFound("La URL corta no se encontró en la base de datos.");
+            }
+
             urlEntity.VisitCount++;
             _context.SaveChanges();
-            var OG = urlEntity.urlOG;
-            return Ok(OG);
+
+            return new RedirectResult(urlEntity.urlOG);
+
         }
+
 
         [HttpGet("mostrar-visitas-url")]
         public async Task<IActionResult> ShowAllUrlAsync()
